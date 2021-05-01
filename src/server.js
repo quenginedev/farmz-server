@@ -17,5 +17,10 @@ server.use(morgan('dev'))
 server.use('/farmer', farmerRouter)
 server.use('/region', regionRouter)
 server.use('/farm', farmRouter)
+server.all('*', (req, res)=>{
+	res.json({
+		message: 'Farmers API'
+	})
+})
 
 module.exports = server
