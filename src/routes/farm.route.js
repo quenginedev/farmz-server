@@ -3,7 +3,7 @@ const { Router } = require('express')
 const router = Router()
 
 router.get('/', async (req, res) => {
-	res.json(await farmModel.find().populate('farmer_id', '_id full_name'))
+	res.json(await farmModel.find().populate('_farmer_id', '_id full_name'))
 })
 
 router.get('/count', async (req, res) => {
@@ -11,7 +11,7 @@ router.get('/count', async (req, res) => {
 })
 
 router.get('/farmer/:farmer_id', async (req, res) => {
-	res.json(await farmModel.find({farmer_id: req.params.farmer_id}).populate('farmer_id', '_id full_name'))
+	res.json(await farmModel.find({_farmer_id: req.params.farmer_id}).populate('_farmer_id', '_id full_name'))
 })
 
 router.put('/:id', async (req, res) => {

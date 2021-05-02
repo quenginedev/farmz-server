@@ -2,7 +2,7 @@ const {Schema, model} = require('mongoose')
 // const { v4 } = require('uuid')
 
 const FarmerSchema = new Schema({
-	// farmer_id: String,
+	farmer_id: String,
 	full_name: {
 		type: String,
 		required: true
@@ -87,12 +87,6 @@ const FarmerSchema = new Schema({
 	},
 })
 
-// FarmerSchema.pre('save', function (next){
-// 	// this.farmer_id =
-// 	// 	`${this.full_name.substr(0, 3)}/${this.community.substr(0, 3)}/${this.region.substr(0, 3)}/`
-// 	this.farmer_id = v4()
-// 	next()
-// })
 
 const FarmerModel = model('farmer', FarmerSchema)
 module.exports = FarmerModel
