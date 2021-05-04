@@ -1,5 +1,5 @@
 const farmModel = require('../model/Farm.model')
-const { Router } = require('express')
+const {Router} = require('express')
 const router = Router()
 
 router.get('/', async (req, res) => {
@@ -23,5 +23,15 @@ router.post('/', async (req, res) => {
 	res.json(await farmModel.create(req.body))
 })
 
+router.delete('/:id', async (req, res) => {
+	try {
+		const _id = req.params.id
+		await farmModel.deleteOne({_id})
+		res.json({message: 'farm deleted successfully'})
+	} catch (e) {
+		console.log(e)
+		res.status(500).json({message: 'Error deleting farm'})
+	}
+})
 
 module.exports = router

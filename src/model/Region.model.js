@@ -12,7 +12,6 @@ const RegionSchema = new Schema({
 		required: true,
 		unique: true
 	},
-	// status: Boolean,
 	deleted: {
 		type: Boolean,
 		default: false
