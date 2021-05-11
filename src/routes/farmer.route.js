@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
 		let farm_counter = await FarmModel.count()
 		for (let i = 0; i < new_farmer.farm_location.length; i++) {
 			let location = new_farmer.farm_location[i]
-			const farm_id = `${farm_counter + 1}/${farmer_id}/${upperThreeLetters(location.address)}`
+			const farm_id = `${farm_counter + i + 1}/${farmer_id}/${upperThreeLetters(location.address)}`
 			const farm = {
 				name: `farm ${i + 1}`,
 				_farmer_id: farmer_doc._id,
