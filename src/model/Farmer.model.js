@@ -1,4 +1,4 @@
-const {Schema, model} = require('mongoose')
+const {Schema, model, Types} = require('mongoose')
 // const { v4 } = require('uuid')
 
 const FarmerSchema = new Schema({
@@ -21,8 +21,8 @@ const FarmerSchema = new Schema({
 		required: true
 	},
 	region: {
-		type: String,
-		required: true
+		type: Types.ObjectId,
+		ref: 'region'
 	},
 	household_status: {
 		type: String,
@@ -86,6 +86,8 @@ const FarmerSchema = new Schema({
 		required: true
 	},
 	disabled: Boolean
+}, {
+	timestamps: true
 })
 
 

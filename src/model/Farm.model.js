@@ -20,6 +20,8 @@ const FarmSchema = new Schema({
 		},
 		coordinates: [Number]
 	}
+}, {
+	timestamps: true
 })
 
 const FarmModel = model('farm', FarmSchema)
