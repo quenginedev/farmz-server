@@ -24,13 +24,13 @@ router.post('/', async (req, res) => {
 		let farm_counter = await FarmModel.count()
 		for (let i = 0; i < new_farmer.farm_location.length; i++) {
 			let location = new_farmer.farm_location[i]
-			const farm_id = `${farm_counter++}/${farmer_id}/${upperThreeLetters(location)}`
+			const farm_id = `${farm_counter + 1}/${farmer_id}/${upperThreeLetters(location.address)}`
 			const farm = {
 				name: `farm ${i + 1}`,
 				_farmer_id: farmer_doc._id,
 				farmer_id,
 				farm_id,
-				location,
+				location
 			}
 			await FarmModel.create(farm)
 		}
@@ -56,7 +56,17 @@ router.get('/:id', async (req, res) => {
 	res.json({...details.toJSON(), farms})
 })
 
+router.put('/:id', async (req, res) => {
+	const _id = req.params.id
+	const data = req.body
+	const updateFarmer = FarmerModel.findOneAndUpdate({_id}, {
+		$set: data
+	})
+	res.json(await updateFarmer)
+})
+
 function upperThreeLetters(string = '') {
+	console.log({string})
 	return string.substr(0, 3).toUpperCase()
 }
 

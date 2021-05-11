@@ -85,6 +85,7 @@ const FarmerSchema = new Schema({
 		type: String,
 		required: true
 	},
+	disabled: Boolean
 })
 
 

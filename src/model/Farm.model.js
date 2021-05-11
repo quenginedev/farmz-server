@@ -13,8 +13,12 @@ const FarmSchema = new Schema({
 		required: true
 	},
 	location: {
-		type: String,
-		required: true
+		address: String,
+		type: {
+			type: String,
+			default: 'Point'
+		},
+		coordinates: [Number]
 	}
 })
 
