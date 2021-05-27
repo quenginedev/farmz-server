@@ -1,10 +1,13 @@
 // Route /farmer
+const fs = require('fs')
+const path = require('path')
 const {Router} = require('express')
-const {Types} = require('mongoose')
 const FarmerModel = require('../model/Farmer.model')
 const FarmModel = require('../model/Farm.model')
 const RegionModel = require('../model/Region.model')
 const router = Router()
+const {Parser} = require('json2csv')
+
 
 router.post('/', async (req, res) => {
 	try {
@@ -49,12 +52,35 @@ router.get('/count', async (req, res) => {
 	res.json(await FarmerModel.count())
 })
 
+router.get('/download', async (req, res) => {
+	const farmers = await FarmerModel.find({}).select('-picture -__v -disabled')
+	const fields = [
+		'_id', 'farmer_id', 'full_name"', 'gender', 'date_of_birth', 'lang',
+		'community', 'household_status', 'dependents_number',
+		'marital_status', 'employment_status', 'educational_level',
+		'yrs_farming', 'source_income', 'trainee_status', 'level_training',
+		'buying_company', 'phone', 'momo',
+	]
+	const opts = {fields}
+
+	try {
+		const parser = new Parser(opts)
+		const csv = parser.parse(farmers)
+		const csv_destination = path.join(__dirname, 'farmers.csv')
+		fs.writeFileSync(csv_destination, csv)
+		res.download(csv_destination)
+	} catch (err) {
+		console.error(err)
+	}
+})
+
 router.get('/:id', async (req, res) => {
 	const farmer_id = req.params.id
 	const farms = await FarmModel.count({_farmer_id: farmer_id})
 	const details = await FarmerModel.findById(req.params.id).populate('region')
 	res.json({...details.toJSON(), farms})
 })
+
 
 router.put('/:id', async (req, res) => {
 	const _id = req.params.id
