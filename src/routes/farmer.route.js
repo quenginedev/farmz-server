@@ -53,9 +53,9 @@ router.get('/count', async (req, res) => {
 })
 
 router.get('/download', async (req, res) => {
-	const farmers = await FarmerModel.find({}).select('-picture -__v -disabled')
+	const farmers = await FarmerModel.find({})
 	const fields = [
-		'_id', 'farmer_id', 'full_name"', 'gender', 'date_of_birth', 'lang',
+		'_id', 'farmer_id', 'full_name', 'gender', 'date_of_birth', 'lang',
 		'community', 'household_status', 'dependents_number',
 		'marital_status', 'employment_status', 'educational_level',
 		'yrs_farming', 'source_income', 'trainee_status', 'level_training',
@@ -64,6 +64,7 @@ router.get('/download', async (req, res) => {
 	const opts = {fields}
 
 	try {
+		console.log(farmers[0].full_name)
 		const parser = new Parser(opts)
 		const csv = parser.parse(farmers)
 		const csv_destination = path.join(__dirname, 'farmers.csv')

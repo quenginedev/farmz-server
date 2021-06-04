@@ -1,3 +1,0 @@
-"_id","farmer_id","full_name""","gender","date_of_birth","lang","community","household_status","dependents_number","marital_status","employment_status","educational_level","yrs_farming","source_income","trainee_status","level_training","buying_company","phone","momo"
-"60985a4d66d94d515008d4f0","1/ERN/ADK/GR",,"male","2021-05-03","English","adk","Household Status Support",1,"Single","others","tertiary","1970-01-01T00:00:00.001Z","dev","Owner",1,"Agro","+233506960917","+233506960917"
-"6099174c3dc7591a008ae41d","2/KAL/TEM/GR",,"male","1995-06-15","English","tema","Household Status Support",1,"Single","others","tertiary","1970-01-01T00:00:00.001Z","dev","Worker",2,"Agro","+233506960917","+233506960917"
