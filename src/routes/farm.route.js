@@ -15,8 +15,9 @@ router.get('/farmer/:farmer_id', async (req, res) => {
 })
 
 router.put('/:id', async (req, res) => {
-	const name = req.body.name
-	res.json(await farmModel.updateOne({_id: req.params.id}, {name}))
+	const body = req.body
+	const _id = req.params.id
+	res.json(await farmModel.updateOne({_id}, body))
 })
 
 router.post('/', async (req, res) => {
